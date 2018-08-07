@@ -1,0 +1,157 @@
+
+body, td, th, p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+body {
+  background-color: #fdfdfd;
+  margin: 0;
+  position: relative;
+}
+
+ul, li {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+a {
+  color: orange;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #3397db;
+  text-decoration: none;
+}
+
+a img {
+  border: none 0px #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 0 0.7rem;
+}
+
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+
+.App {
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #252831;
+  color: white;
+  text-align: center;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: 200;
+  letter-spacing: 0.625rem;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+main {
+  background-color: #f3f3f3;
+  min-height: calc(100vh - 60px);
+  margin: 60px auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.col {
+  width: 100%;
+}
+
+.map {
+  height: 100%;
+}
+.info {
+  margin-bottom: 50px;
+}
+
+#map {
+  background-color: #ccc;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  margin-top: 0;
+}
+
+.map-container {
+  background: blue none repeat scroll 0 0;
+  height: 400px;
+  width: 95%;
+  margin: 0 auto;
+}
+.info-container {
+text-align: left;
+padding: 15px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #444;
+  color: #aaa;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  height: 50px;
+
+}
+footer p {
+  color: white;
+}
+
+@media screen and (min-width: 980px) {
+  .col {
+    width: 50%;
+  }
+  .map {
+    order: 2;
+  }
+  .info {
+    order: 1;
+  }
+.map-container {
+    width: 50%;
+    height: 100%;
+    position: fixed;
+    top: 60px;
+    right: 0;
+  }
+  footer {
+    width: 50%;
+    right: 50%;
+  }
+}
