@@ -7,34 +7,28 @@ import * as AirAPI from './AirAPI';
 class App extends Component {
 
   state = {
-    allStations: [
-  {
-    "id": 0,
-    "name": "Fake",
-    "vendor": "Airly",
-    "location": {
-      "latitude": 52.219113,
-      "longitude": 21.017232999999997
-    },
-    "pollutionLevel": 0,
-    "address": {
-      "streetNumber": "0",
-      "route": "Fake",
-      "locality": "Warszawa",
-      "country": "Poland"
-    }
-  }
-],
-dataLoaded: false
+    allStations: [],
+dataLoaded: false,
+mapZoom: false,
+chosenStation: {}
   }
 
 
   componentDidMount() {
     AirAPI.getAllStations()
     .then(allStations => this.setState({allStations: allStations}, () => {
-        this.setState({dataLoaded: true}) }))
+        this.setState({dataLoaded: true}) })) // prevent passing empty array to map component
     .catch(() => console.log('getAllStations failed'));
   }
+
+
+  setStation(station) {
+    this.setState({chosenStation: station}, () => {
+        this.setState({mapZoom: true}); console.log('station: ', this.chosenStation)}
+
+)}
+
+setStation = this.setStation.bind(this);
 
   render() {
 
@@ -44,9 +38,9 @@ dataLoaded: false
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations}/> : 'Waiting for external data '
-}
-      <Info allStations = {this.state.allStations}/>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} mapZoom = {this.mapZoom}/> : <p>Waiting for external data</p>
+     }
+      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} mapZoom = {this.mapZoom}/>
 
     </main>
 
