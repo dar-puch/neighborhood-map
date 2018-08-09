@@ -4,15 +4,10 @@ import App from './App';
 import MapStyles from './MapStyles.json';
 
 class Map extends Component {
-  constructor(props) {
-     super(props);
-     this.state = {
 
-     }
-  }
 
   mapScriptLoaded() {
-
+console.log('prop map: ' + this.props.allStations[0].id)
       const map = new window.google.maps.Map(
         document.getElementById('map'),
         {
@@ -35,11 +30,9 @@ class Map extends Component {
       let singlePos = {lat: 52.161486 , lng: 21.069094};
 
 let stations = this.props.allStations;
-console.log('stations: ' + stations);
   stations.map(station => {
     let lat = station.location.latitude;
     let lng = station.location.longitude;
-    console.log('lat: ' + lat);
     let myLatlng = new window.google.maps.LatLng(lat,lng);
 
     let marker = new window.google.maps.Marker({
@@ -75,9 +68,8 @@ console.log('stations: ' + stations);
       })
   }
 
-  this.mapScriptLoaded = this.mapScriptLoaded.bind(this);
-    render() {
 
+    render() {
       return(
       <div className="col map">
     <section className="map-container">
