@@ -5,14 +5,19 @@ import MapStyles from './MapStyles.json';
 
 class Map extends Component {
 
-markers = []
-  mapScriptLoaded() {
-    const initialPos = {lat: 52.161486 , lng: 21.069094};
-      const map = new window.google.maps.Map(
+initialPos = {lat: 52.237049 , lng: 21.017532};
+map;
+
+  prepareMap() {
+      this.map = new window.google.maps.Map(
         document.getElementById('map'),
         {
-          center: initialPos,
-          zoom: 10,
+          center: this.initialPos,
+          mapTypeControl: false,
+          streetViewControl: false,
+  rotateControl: false,
+  fullscreenControl: false,
+          zoom: 12,
           maptype: 'terrain',
           styles: MapStyles
         },
@@ -30,7 +35,6 @@ markers = []
 
 let stations = this.props.allStations;
 let set = this.props.setStation;
-let zoom = this.props.mapZoom;
 let chosen = this.props.chosenStation;
 
   stations.map(station => {
@@ -40,30 +44,32 @@ let chosen = this.props.chosenStation;
     let marker = new window.google.maps.Marker({
       position: latLng,
       title: station.name,
-      map: map,
+      map: this.map,
      animation: window.google.maps.Animation.DROP,
      icon: circle
     });
-    this.markers.push(marker);
+
     marker.addListener('click', function() {
       set(station);
-      map.panTo(latLng);
-      map.setZoom(15)
           });
 bounds.extend(marker.position);
   })
 
-map.fitBounds(bounds);
-if (Object.keys(chosen).length > 0) {
-  let chosenLatLng = new window.google.maps.LatLng(chosen.location.latitude, chosen.location.longitude);
-  map.panTo(chosenLatLng);
-  map.setZoom(15);
+this.map.fitBounds(bounds);
+
+}; //end prepareMap
+
+updateMap(chosen) {
+  if (Object.keys(chosen).length > 0) {
+    let chosenLatLng = new window.google.maps.LatLng(chosen.location.latitude, chosen.location.longitude);
+    this.map.panTo(chosenLatLng);
+    this.map.setZoom(15);
+  }
+  else {
+    this.map.panTo(this.initialPos);
+    this.map.setZoom(12);
+  }
 }
-else {
-  map.panTo(initialPos);
-  map.setZoom(15);
-}
-};
 
     toggleBounce() {
         if (this.marker.getAnimation() !== null) {
@@ -79,11 +85,11 @@ else {
       script.src = `https://maps.google.com/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
       document.body.appendChild(script);
       script.addEventListener('load', e => {
-        this.mapScriptLoaded()
+        this.prepareMap()
       })
   }
   componentDidUpdate() {
-      this.mapScriptLoaded()
+      this.updateMap(this.props.chosenStation)
   }
 
 

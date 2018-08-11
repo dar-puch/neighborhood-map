@@ -9,7 +9,6 @@ class App extends Component {
   state = {
     allStations: [],
 dataLoaded: false,
-mapZoom: false,
 chosenStation: {}
   }
 
@@ -23,9 +22,7 @@ chosenStation: {}
 
 
   setStation(station) {
-    this.setState({chosenStation: station}, () => {
-        this.setState({mapZoom: true}); console.log('station: ', this.chosenStation)}
-
+    this.setState({chosenStation: station}
 )}
 
 setStation = this.setStation.bind(this);
@@ -38,9 +35,9 @@ setStation = this.setStation.bind(this);
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} mapZoom = {this.mapZoom}/> : <p>Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation}/> : <p>Waiting for external data</p>
      }
-      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} mapZoom = {this.mapZoom}/>
+      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation}/>
 
     </main>
 

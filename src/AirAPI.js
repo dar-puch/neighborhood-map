@@ -2,7 +2,7 @@ const api = "https://airapi.airly.eu/v1"
 
 
 export const getAllStations = () =>
-fetch(`${api}/sensors/current?southwestLat=52.103168&southwestLong=20.8514&northeastLat=52.3672&northeastLong=21.2702`, {
+fetch(`${api}/sensors/current?southwestLat=52.311&southwestLong=20.87&northeastLat=52.12&northeastLong=21.14`, {
         method: "GET",
         headers:{
 "apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
