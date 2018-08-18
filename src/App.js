@@ -9,7 +9,9 @@ class App extends Component {
   state = {
     allStations: [],
 dataLoaded: false,
-chosenStation: {}
+chosenStation: {},
+stationsFound: [],
+query: ''
   }
 
 
@@ -20,6 +22,13 @@ chosenStation: {}
     .catch(() => console.log('getAllStations failed'));
   }
 
+  updateQuery = (query) => {
+    query = query.toLowerCase();
+    let stationsFound = this.state.allStations.filter(station => station.name.toLowerCase().search(query) > -1);
+    this.setState({
+          stationsFound: stationsFound
+        });
+  }
 
   setStation(station) {
     this.setState({chosenStation: station}
@@ -35,9 +44,9 @@ setStation = this.setStation.bind(this);
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation}/> : <p>Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} stationsFound = {this.state.stationsFound}/> : <p>Waiting for external data</p>
      }
-      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation}/>
+      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} stationsFound = {this.state.stationsFound} updateQuery = {this.updateQuery}/>
 
     </main>
 
