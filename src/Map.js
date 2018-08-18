@@ -7,7 +7,6 @@ class Map extends Component {
 initialPos = {lat: 52.237049 , lng: 21.017532};
 markers = [];
 foundMarkers = [];
-bounds;
 map;
   mapInit() {
       this.map = new window.google.maps.Map(
@@ -27,7 +26,6 @@ map;
 }; //mapInit
 
 showMarkers(stations) {
-  this.bounds = new window.google.maps.LatLngBounds();
   const circle = {
       path: 'M10,20a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
       strokeColor: '#00a3ff', //blue
@@ -48,16 +46,23 @@ showMarkers(stations) {
       set(station);
           });
     this.markers.push(marker);
-this.map.fitBounds(this.bounds);
-this.bounds.extend(marker.position);
+
   })
+}
+
+fitBounds(markers) {
+let bounds = new window.google.maps.LatLngBounds();
+  markers.forEach(marker => bounds.extend(marker.getPosition()));
+  this.map.fitBounds(bounds);
+  if(this.map.getZoom()> 17){
+  this.map.setZoom(17);
+}
 }
 
 setMapOnAll(map, markersArr) {
   markersArr.forEach((marker) => {
     marker.setMap(map);
-this.bounds.extend(marker.position);
-this.map.fitBounds(this.bounds)
+this.fitBounds(markersArr);
 }
 )
 }
@@ -88,23 +93,7 @@ this.map.fitBounds(this.bounds)
   }
 
   componentDidUpdate() {
-      if (Object.keys(this.props.chosenStation).length > 0) { //when station is clicked, zoom to marker
-        let id = this.props.chosenStation.id;
-        let  chosenMarker = this.markers.find(marker => marker.stationId === id)
 
-
-        let chosenLatLng = new window.google.maps.LatLng(this.props.chosenStation.location.latitude, this.props.chosenStation.location.longitude);
-
-        this.clearMarkers(this.markers);
-        this.clearMarkers(this.foundMarkers);
-        chosenMarker.setMap(this.map);
-        this.map.panTo(chosenLatLng);
-        this.bounds.extend(chosenLatLng);
-        this.map.fitBounds(this.bounds)
-    }
-    else { //zoom back
-      this.map.panTo(this.initialPos);
-      this.map.setZoom(12);
       if (this.props.stationsFound.length > 0) { //when there are search results, show markers for found stations
         this.foundMarkers = this.markers.filter(marker => this.props.stationsFound.find(station => station.id === marker.stationId));
         this.clearMarkers(this.markers);
@@ -114,8 +103,6 @@ this.map.fitBounds(this.bounds)
         this.clearMarkers(this.foundMarkers);
         this.setMapOnAll(this.map, this.markers);
       }
-    }
-
   } //componentDidUpdate
 
 

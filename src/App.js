@@ -31,7 +31,7 @@ query: ''
   }
 
   setStation(station) {
-    this.setState({chosenStation: station}
+    this.setState({stationsFound: [station]}
 )}
 
 setStation = this.setStation.bind(this);
@@ -44,9 +44,9 @@ setStation = this.setStation.bind(this);
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} stationsFound = {this.state.stationsFound}/> : <p>Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound}/> : <p>Waiting for external data</p>
      }
-      <Info allStations = {this.state.allStations} chosenStation = {this.state.chosenStation} setStation = {this.setStation} stationsFound = {this.state.stationsFound} updateQuery = {this.updateQuery}/>
+      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} updateQuery = {this.updateQuery}/>
 
     </main>
 
