@@ -15,23 +15,23 @@ query: ''
 
 
   componentDidMount() {
-    AirAPI.getAllStations()
+    AirAPI.getAllStations() //get array of all stations in Warsaw
     .then(allStations => this.setState({allStations: allStations}, () => {
         this.setState({dataLoaded: true}) })) // prevent passing empty array to map component
     .catch(() => console.log('getAllStations failed'));
   }
 
   updateQuery = (query) => {
-    this.setState({query: ''});
-    query = query.toLowerCase();
-    let stationsFound = this.state.allStations.filter(station => station.name.toLowerCase().search(query) > -1);
+    query = query.toLowerCase(); //our search is not case sensitive
+    let stationsFound = this.state.allStations.filter(station => station.name.toLowerCase().search(query) > -1 || station.address.route.toLowerCase().search(query) > -1); //filter array of all stations to match query
     this.setState({
-          stationsFound: stationsFound
+          stationsFound: stationsFound, //save results as state
+          query: query
         });
   }
 
-  setStation(station) {
-    this.updateQuery(station.name);
+  setStation(station) { //this function is called when user clicks particular station on the map
+      this.setState({query: ''});
     this.setState({stationsFound: [station]}
 )}
 

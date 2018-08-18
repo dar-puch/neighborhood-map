@@ -11,6 +11,7 @@ render() {
 
       <div className="filter-options" id="filter">
         <h2>Filter Results</h2>
+        <p>Search stations by name or street address</p>
 
         <input type = "text" placeholder = "Search"
                value = {this.props.query}
