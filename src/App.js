@@ -9,7 +9,6 @@ class App extends Component {
   state = {
     allStations: [],
 dataLoaded: false,
-chosenStation: {},
 stationsFound: [],
 query: ''
   }
@@ -23,6 +22,7 @@ query: ''
   }
 
   updateQuery = (query) => {
+    this.setState({query: ''});
     query = query.toLowerCase();
     let stationsFound = this.state.allStations.filter(station => station.name.toLowerCase().search(query) > -1);
     this.setState({
@@ -31,6 +31,7 @@ query: ''
   }
 
   setStation(station) {
+    this.updateQuery(station.name);
     this.setState({stationsFound: [station]}
 )}
 
@@ -46,7 +47,7 @@ setStation = this.setStation.bind(this);
         <main>
         {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound}/> : <p>Waiting for external data</p>
      }
-      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} updateQuery = {this.updateQuery}/>
+      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery}/>
 
     </main>
 

@@ -3,17 +3,6 @@ import * as AirAPI from './AirAPI';
 import App from './App';
 
 class Info extends Component {
-state = {
-  query: ''
-}
-
-setQuery(query) {
-  query = query.toLowerCase();
-  this.setState({
-        query: query
-      });
-      this.props.updateQuery(query);
-}
 
 render() {
   return(
@@ -24,8 +13,8 @@ render() {
         <h2>Filter Results</h2>
 
         <input type = "text" placeholder = "Search"
-               value = {this.state.query}
-               onChange = {(event) => this.setQuery(event.target.value)}/>
+               value = {this.props.query}
+               onChange = {(event) => this.props.updateQuery(event.target.value)}/>
 
 
       <h2> Stations </h2>
