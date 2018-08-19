@@ -145,7 +145,7 @@ footer p {
   }
 .map-container {
     width: 50%;
-    height: 100%;
+    height: calc(100% - 60px);
     position: fixed;
     top: 60px;
     right: 0;

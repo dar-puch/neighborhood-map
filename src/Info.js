@@ -5,15 +5,11 @@ import Station from './Station';
 
 class Info extends Component {
 
-rememberStation(station){
-let current = this.props.allStations.find(allStation => allStation.id == station.id);
-//this.props.setStation(current) //not working
-}
 
   renderStations() {
      if (this.props.stationsFound.length > 0) {
     return (this.props.stationsFound.map((station) => (
-       <li key = {station.id} > {station.name}, {station.address.route} {station.address.streetNumber} {this.renderDescription()}   <button className="showDetails" id={station.id} onClick = {this.rememberStation(station)}> Measurements </button>
+       <li key = {station.id} > <button className="showDetails" id={station.id} onClick = {event => this.props.setStation(event.target)}>{station.name}, {station.address.route} {station.address.streetNumber} </button>
  </li>
      )))
      }
@@ -21,18 +17,16 @@ let current = this.props.allStations.find(allStation => allStation.id == station
    else {
      return(
      this.props.allStations.map((station) => (
-       <li key = {station.id} > {station.name}, {station.address.route} {station.address.streetNumber}   <button className="showDetails" id={station.id} onClick = {event => this.rememberStation(event.target)}> Measurements </button> </li>
-     ))
-   );
-
-
+       <li key = {station.id} ><button className="showDetails" id={station.id} onClick = {event => this.props.setStation(event.target)}> {station.name}, {station.address.route} {station.address.streetNumber} </button> </li>
+     )));
    };
-
   }
 
 renderDescription() {
-  if (this.props.stationsFound.length === 1) {
-  return <Station id = {this.props.stationsFound[0].id} clearStation = {this.props.clearStation}/>
+  if (Object.keys(this.props.oneStation).length > 0) {
+  return (<Station id = {this.props.oneStation.id} clearStation = {this.props.clearStation}/>
+
+  )
   }
 
 };
@@ -54,6 +48,7 @@ render() {
         </div>
 
       <ul className="stations-list">
+      {this.renderDescription()}
       <h2> Stations </h2>
       {this.renderStations()};
       </ul>

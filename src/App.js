@@ -32,14 +32,11 @@ oneStation: {}
   }
 
   setStation(station) { //this function is called when user clicks particular station on the map
-      this.setState({query: ''});
-    this.setState({oneStation: station}, () => {console.log('state set:', this.state.oneStation)})
-
+    this.setState({oneStation: station})
 }
 
 clearStation() {
-  this.setState({query: ''});
-this.setState({stationsFound: []})
+this.setState({oneStation: {}})
 }
 
 setStation = this.setStation.bind(this);

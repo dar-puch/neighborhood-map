@@ -26,11 +26,12 @@ map;
 }; //mapInit
 
 showMarkers(stations) {
+
   const circle = {
       path: 'M10,20a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
-      strokeColor: '#00a3ff', //blue
-      fillColor: '#00a3ff',
-      fillOpacity: 0.5
+      strokeColor: '#ecdd18', //blue
+      fillColor: '#5d035c',
+      fillOpacity: 1
     };
   let set = this.props.setStation;
   stations.map(station => {
@@ -69,8 +70,9 @@ this.fitBounds(markersArr);
 
 setMapOnOne(map, marker) {
   marker.setMap(map);
-this.fitBounds(marker);
+this.fitBounds([marker]);
 }
+
 
     clearMarkers(markersArr) {
         this.setMapOnAll(null, markersArr);
@@ -103,11 +105,20 @@ this.fitBounds(marker);
         this.clearMarkers(this.markers);
         this.setMapOnAll(this.map, this.foundMarkers);
       }
-      
+
       else { //if not - show all markers
         this.clearMarkers(this.foundMarkers);
         this.setMapOnAll(this.map, this.markers);
       }
+
+      if (Object.keys(this.props.oneStation).length > 0) { //when station is clicked, zoom to marker
+        let id = this.props.oneStation.id;
+        let  chosenMarker = this.markers.find(marker => marker.stationId == id);
+        this.clearMarkers(this.foundMarkers);
+        this.clearMarkers(this.markers);
+        this.setMapOnOne(this.map, chosenMarker);
+      }
+
   } //componentDidUpdate
 
 
