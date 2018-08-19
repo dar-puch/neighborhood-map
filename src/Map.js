@@ -67,6 +67,10 @@ this.fitBounds(markersArr);
 )
 }
 
+setMapOnOne(map, marker) {
+  marker.setMap(map);
+this.fitBounds(marker);
+}
 
     clearMarkers(markersArr) {
         this.setMapOnAll(null, markersArr);
@@ -99,6 +103,7 @@ this.fitBounds(markersArr);
         this.clearMarkers(this.markers);
         this.setMapOnAll(this.map, this.foundMarkers);
       }
+      
       else { //if not - show all markers
         this.clearMarkers(this.foundMarkers);
         this.setMapOnAll(this.map, this.markers);

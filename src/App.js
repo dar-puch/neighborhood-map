@@ -6,11 +6,12 @@ import * as AirAPI from './AirAPI';
 
 class App extends Component {
 
-  state = {
-    allStations: [],
+state = {
+allStations: [],
 dataLoaded: false,
 stationsFound: [],
-query: ''
+query: '',
+oneStation: {}
   }
 
 
@@ -32,10 +33,17 @@ query: ''
 
   setStation(station) { //this function is called when user clicks particular station on the map
       this.setState({query: ''});
-    this.setState({stationsFound: [station]}
-)}
+    this.setState({oneStation: station}, () => {console.log('state set:', this.state.oneStation)})
+
+}
+
+clearStation() {
+  this.setState({query: ''});
+this.setState({stationsFound: []})
+}
 
 setStation = this.setStation.bind(this);
+clearStation = this.clearStation.bind(this);
 
   render() {
 
@@ -45,9 +53,9 @@ setStation = this.setStation.bind(this);
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound}/> : <p>Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation}/> : <p>Waiting for external data</p>
      }
-      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery}/>
+      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation}/>
 
     </main>
 
