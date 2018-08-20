@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import * as AirAPI from './AirAPI';
-import App from './App';
 import Station from './Station';
 
 class Info extends Component {
@@ -9,22 +7,27 @@ class Info extends Component {
   renderStations() {
      if (this.props.stationsFound.length > 0) {
     return (this.props.stationsFound.map((station) => (
-       <li key = {station.id} > <button className="showDetails" id={station.id} onClick = {event => this.props.setStation(event.target)}>{station.name}, {station.address.route} {station.address.streetNumber} </button>
+       <li key = {station.id} > <button className="show-details" id={station.id} onClick = {() => this.props.setStation(station)}>{station.name}, {station.address.route} {station.address.streetNumber} </button>
  </li>
      )))
      }
 
-   else {
+   else if ((this.props.allStations.length > 0) && (this.props.query === '')){
      return(
      this.props.allStations.map((station) => (
-       <li key = {station.id} ><button className="showDetails" id={station.id} onClick = {event => this.props.setStation(event.target)}> {station.name}, {station.address.route} {station.address.streetNumber} </button> </li>
-     )));
-   };
+       <li key = {station.id} ><button className="show-details" id={station.id} onClick = {() => this.props.setStation(station)}> {station.name}, {station.address.route} {station.address.streetNumber} </button> </li>
+     )))
+   }
+   else {
+     return(
+     <p>no results</p>
+   )
+   }
   }
 
 renderDescription() {
   if (Object.keys(this.props.oneStation).length > 0) {
-  return (<Station id = {this.props.oneStation.id} clearStation = {this.props.clearStation}/>
+  return (<Station oneStation = {this.props.oneStation} clearStation = {this.props.clearStation}/>
 
   )
   }
@@ -50,7 +53,7 @@ render() {
       <ul className="stations-list">
       {this.renderDescription()}
       <h2> Stations </h2>
-      {this.renderStations()};
+      {this.renderStations()}
       </ul>
 
 

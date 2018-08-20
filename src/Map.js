@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import * as AirAPI from './AirAPI';
-import App from './App';
 import MapStyles from './MapStyles.json';
 
 class Map extends Component {
@@ -93,8 +91,11 @@ this.fitBounds([marker]);
       document.body.appendChild(script);
       script.addEventListener('load', e => {
         this.mapInit();
+        if (this.props.allStations.length > 0) {
         this.showMarkers(this.props.allStations);
         this.setMapOnAll(this.map, this.markers)
+        }
+      
       })
   }
 
