@@ -55,7 +55,7 @@ clearStation = this.clearStation.bind(this);
         </header>
         <main>
         <div className="errors">{AirAPI.displayErrors()}</div>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation}/> : <p>Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors">Waiting for external data</p>
      }
       <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation}/>
 

@@ -27,8 +27,8 @@ showMarkers(stations) {
 
   const circle = {
       path: 'M10,20a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
-      strokeColor: '#ecdd18', //blue
-      fillColor: '#5d035c',
+      strokeColor: '#5E667D',
+      fillColor: '#252831',
       fillOpacity: 1
     };
   let set = this.props.setStation;
@@ -69,6 +69,7 @@ this.fitBounds(markersArr);
 setMapOnOne(map, marker) {
   marker.setMap(map);
 this.fitBounds([marker]);
+this.toggleBounce(marker);
 }
 
 
@@ -76,11 +77,12 @@ this.fitBounds([marker]);
         this.setMapOnAll(null, markersArr);
       }
 
-    toggleBounce() {
-        if (this.marker.getAnimation() !== null) {
-          this.marker.setAnimation(null);
+    toggleBounce(marker) {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
         } else {
-          this.marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          setTimeout(function(){ marker.setAnimation(null); }, 1500);
         }
       }
 
@@ -95,7 +97,7 @@ this.fitBounds([marker]);
         this.showMarkers(this.props.allStations);
         this.setMapOnAll(this.map, this.markers)
         }
-      
+
       })
   }
 
@@ -107,10 +109,12 @@ this.fitBounds([marker]);
         this.setMapOnAll(this.map, this.foundMarkers);
       }
 
-      else { //if not - show all markers
+      else if ((this.props.allStations.length > 0) && (this.props.query === '')){ //if not - show all markers
         this.clearMarkers(this.foundMarkers);
         this.setMapOnAll(this.map, this.markers);
       }
+      else {this.clearMarkers(this.foundMarkers);
+      this.clearMarkers(this.markers);}
 
       if (Object.keys(this.props.oneStation).length > 0) { //when station is clicked, zoom to marker
         let id = this.props.oneStation.id;

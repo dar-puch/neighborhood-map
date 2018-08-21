@@ -43,9 +43,9 @@ render() {
 
       <div className="filter-options" id="filter">
         <h2>Filter Results</h2>
-        <p>Search stations by name or street address</p>
+        <p className="instructions">Search stations by name or street address</p>
 
-        <input type = "text" placeholder = "Search"
+        <input type = "text" placeholder = "Search" className="input-search"
                value = {this.props.query}
                onChange = {(event) => this.props.updateQuery(event.target.value)}/>
         </div>
@@ -53,10 +53,12 @@ render() {
       <ul className="stations-list">
       {this.renderDescription()}
       <h2> Stations </h2>
+      <p className="instructions">Click on station to see measurements</p>
       {this.renderStations()}
       </ul>
 
-
+      <div className="attribution">This application uses Google Maps API and Airly API (<a href="http://www.map.airly.eu"> www.map.airly.eu </a>)
+      <div className="logo-wrapper"><img className="logo-airly" src={"/img/logo-airly.jpg"}/></div></div>
   </section>
   </div>
 

@@ -49,8 +49,8 @@ scrollToContainer() {
 render() {
   this.scrollToContainer()
   if (Object.keys(this.state.current).length === 0) {
-    return(<div><h3>Unable to get data from this station</h3>
-    <button id="closeDetails" onClick={this.props.clearStation}>Close</button></div>)
+    return(<div className="one-station-box"><h3>Unable to get data from this station</h3>
+    <button id="close-details" onClick={this.props.clearStation}>Close</button></div>)
   }
   else {
   return(
@@ -59,13 +59,13 @@ render() {
     <p>{this.props.oneStation.name}</p>
     <p>{this.props.oneStation.address.route} {this.props.oneStation.address.streetNumber}</p>
     <h3>Latest measurements:</h3>
+    <p className={this.indexDescription() + " index-description"}>Air Quality Index: <span className="index">{Math.floor(this.state.current.airQualityIndex)} ({this.formatDescription()})</span></p>
     <p>Pollution level: {this.state.current.pollutionLevel}</p>
-    <p className={this.indexDescription() + " one-station-box"}>Air Quality Index: {Math.floor(this.state.current.airQualityIndex)} <span className="index">({this.formatDescription()})</span></p>
     <p>PM 2.5: {Math.floor(this.state.current.pm25)}</p>
     <p>PM 10: {Math.floor(this.state.current.pm10)}</p>
     <p>Pressure: {this.state.current.pressure}</p>
     <p>Temperature: {this.state.current.temperature}</p>
-    <button id="closeDetails" onClick={this.props.clearStation}>Close</button>
+    <button id="close-details" onClick={this.props.clearStation}>Close</button>
     </div>
   )
 }
