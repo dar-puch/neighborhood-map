@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Map from './Map';
 import Info from './Info';
-import * as AirAPI from './AirAPI';
 
 class App extends Component {
 
@@ -11,14 +10,14 @@ allStations: [],
 dataLoaded: false,
 stationsFound: [],
 query: '',
-oneStation: {}
+oneStation: {},
+error: null
   }
 
-
   componentDidMount() {
-    AirAPI.getAllStations() //get array of all stations in Warsaw
+  this.getAllStations() //get array of all stations in Warsaw
     .then(allStations => this.setState({allStations: allStations}, () => {
-        this.setState({dataLoaded: true}) })) // prevent passing empty array to map component
+       this.setState({dataLoaded: true}) })) // prevent passing empty array to map component
     .catch(() => console.log('getAllStations failed'));
   }
 
@@ -41,10 +40,44 @@ clearStation() {
 this.setState({oneStation: {}})
 }
 
-
-
 setStation = this.setStation.bind(this);
 clearStation = this.clearStation.bind(this);
+
+api = "https://airapi.airly.eu/v1";
+
+getAllStations = () =>
+fetch(`${this.api}/sensors/current?southwestLat=52.311&southwestLong=20.87&northeastLat=52.12&northeastLong=21.14`, {
+        method: "GET",
+        headers:{
+"apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
+"Content-Type": "application/json; charset=utf-8"
+}
+        })
+        .then(this.handleErrors)
+    .catch(error => error)
+.then(response => response.json())
+  .then(allstations => allstations);
+
+getStationData = (station) =>
+fetch(`${this.api}sensor/measurements?sensorId=${station}`,
+  {
+          method: "GET",
+          headers:{
+  "apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
+  "Content-Type": "application/json; charset=utf-8"
+  }
+})
+.then(response => response.json())
+  .then(details => details)
+.catch(err => console.log('getting details failed'));
+
+handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+  }
+
 
   render() {
 
@@ -54,10 +87,9 @@ clearStation = this.clearStation.bind(this);
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
         <main>
-        <div className="errors">{AirAPI.displayErrors()}</div>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors">Waiting for external data</p>
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors map-container">Map will render soon</p>
      }
-      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation}/>
+      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation} getStationData = {this.getStationData}/>
 
     </main>
 

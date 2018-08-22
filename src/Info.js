@@ -27,7 +27,7 @@ class Info extends Component {
 
 renderDescription() {
   if (Object.keys(this.props.oneStation).length > 0) {
-  return (<Station oneStation = {this.props.oneStation} clearStation = {this.props.clearStation}/>
+  return (<Station oneStation = {this.props.oneStation} clearStation = {this.props.clearStation} getStationData = {this.props.getStationData}/>
 
   )
   }
@@ -58,7 +58,7 @@ render() {
       </ul>
 
       <div className="attribution">This application uses Google Maps API and Airly API (<a href="http://www.map.airly.eu"> www.map.airly.eu </a>)
-      <div className="logo-wrapper"><img className="logo-airly" src={"/img/logo-airly.jpg"}/></div></div>
+      <div className="logo-wrapper"><img className="logo-airly" src={"/img/logo-airly.jpg"} alt="airly logo"/></div></div>
   </section>
   </div>
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as AirAPI from './AirAPI';
 
 class Station extends Component {
 state = {
@@ -10,12 +9,12 @@ state = {
 container = React.createRef();
 
 componentDidMount(){
-  AirAPI.getStationData(this.props.oneStation.id)
+  this.props.getStationData(this.props.oneStation.id)
   .then(details => this.setState({current: details.currentMeasurements}));
 }
 componentDidUpdate(prevProps, prevState) {
   if (this.props.oneStation && prevProps.oneStation !== this.props.oneStation){
-  AirAPI.getStationData(this.props.oneStation.id)
+  this.props.getStationData(this.props.oneStation.id)
   .then(details => this.setState({current: details.currentMeasurements}));
 }
 }
