@@ -155,9 +155,8 @@ class App extends Component {
       footer >
       <
       p > Copyright(c) 2018 < strong > Puchweb Air < /strong> All Rights Reserved.</p >
-      <
-      /footer> <
-      /div>/ / end App
+      </footer> </div>
+       
     );
   }
 }

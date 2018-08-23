@@ -15,7 +15,7 @@ class Info extends Component {
         id = {
           station.id
         }
-        aria - label = "show details"
+        aria-label = "show details"
         onClick = {
           () => this.props.setStation(station)
         } > {
@@ -24,19 +24,20 @@ class Info extends Component {
           station.address.route
         } {
           station.address.streetNumber
-        } < /button> <
-        /li>
+        } < /button>
+        </li>
       )))
     } else if ((this.props.allStations.length > 0) && (this.props.query === '')) {
       return (
-        this.props.allStations.map((station) => ( <
-          li key = {
+        this.props.allStations.map((station) => (
+          <li key = {
             station.id
-          } > < button className = "show-details"
+          } >
+          <button className = "show-details"
           id = {
             station.id
           }
-          aria - label = "show details"
+          aria-label = "show details"
           onClick = {
             () => this.props.setStation(station)
           } > {
@@ -45,11 +46,10 @@ class Info extends Component {
             station.address.route
           } {
             station.address.streetNumber
-          } < /button> </li >
+          } < /button> </li>
         )))
     } else {
-      return ( <
-        p > no results < /p>
+      return ( <p> no results </p>
       )
     }
   }
@@ -75,25 +75,23 @@ class Info extends Component {
 
 
   render() {
-    return ( <
-      div className = "col info" >
-      <
-      div className = "errors" > {
+    return ( <div className = "col info" >
+      <div className = "errors" > {
         this.props.error
-      } < /div> <
-      section className = "info-container" >
-      <
-      div className = "errors" > < /div> <
-      div className = "filter-options"
-      id = "filter" >
-      <
-      h2 > Filter Results < /h2> <
-      p className = "instructions" > Search stations by name or street address < /p>
+      } </div>
+      <section className = "info-container" >
+      <div className = "errors" >
+      </div>
+      <div className = "filter-options" id = "filter" >
+      <h2> Filter Results
+      </h2>
+      <p className = "instructions"> Search stations by name or street address
+      </p>
 
       <
       input type = "text"
       placeholder = "Search"
-      aria - label = "search"
+      aria-label = "search"
       className = "input-search"
       value = {
         this.props.query
@@ -101,30 +99,31 @@ class Info extends Component {
       onChange = {
         (event) => this.props.updateQuery(event.target.value)
       }
-      /> <
-      /div> <
-      div className = "stations-header" >
-      <
-      h2 > Stations < /h2> <
-      p className = "instructions" > Click on station to see measurements < /p> <
-      /div> <
-      ul className = "stations-list" > {
+      />
+      </div>
+      <div className = "stations-header" >
+      <h2> Stations </h2>
+      <p className = "instructions" >
+      Click on station to see measurements
+      </p>
+      </div>
+      <ul className = "stations-list" > {
         this.renderDescription()
       } {
         this.renderStations()
-      } <
-      /ul>
+      }
+      </ul>
 
-      <
-      div className = "attribution" > This application uses Google Maps API and Airly API( < a href = "http://www.map.airly.eu" > www.map.airly.eu < /a>) <
+      <div className = "attribution" > This application uses Google Maps API and Airly API( <a href = "http://www.map.airly.eu" > www.map.airly.eu </a>) <
         div className = "logo-wrapper" > < img className = "logo-airly"
         src = {
           "/img/logo-airly.jpg"
         }
-        alt = "airly logo" / > < /div></div >
-        <
-        /section> <
-        /div>
+        alt = "airly logo" />
+        </div>
+        </div>
+        </section>
+        </div>
 
       ) //end return
     } //end render

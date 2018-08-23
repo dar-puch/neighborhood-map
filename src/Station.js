@@ -58,54 +58,58 @@ class Station extends Component {
         button id = "close-details"
         onClick = {
           this.props.clearStation
-        } > Close < /button></div > )
+        } > Close
+        < /button>
+        </div > )
     } else {
-      return ( <
-        div ref = {
+      return (
+        <div ref = {
           this.container
         }
         className = "one-station-box" >
-        <
-        h3 > Station no: {
+        <h3 > Station no: {
           this.props.oneStation.id
-        } < /h3> <
-        p > {
+        } < /h3>
+        <p > {
           this.props.oneStation.name
-        } < /p> <
-        p > {
+        } < /p>
+        <p > {
           this.props.oneStation.address.route
         } {
           this.props.oneStation.address.streetNumber
-        } < /p> <
-        h3 > Latest measurements: < /h3> <
-        p className = {
+        } < /p>
+        <h3 > Latest measurements:
+        < /h3>
+        <p className = {
           this.indexDescription() + " index-description"
         } > Air Quality Index: < span className = "index" > {
           Math.floor(this.state.current.airQualityIndex)
         }({
           this.formatDescription()
-        }) < /span></p >
+        }) < /span>
+        </p >
         <
         p > Pollution level: {
           this.state.current.pollutionLevel
-        } < /p> <
-        p > PM 2.5: {
+        } < /p>
+        <p> PM 2.5: {
           Math.floor(this.state.current.pm25)
-        } < /p> <
-        p > PM 10: {
+        } < /p>
+        <p> PM 10: {
           Math.floor(this.state.current.pm10)
-        } < /p> <
-        p > Pressure: {
+        } < /p>
+        <p> Pressure: {
           this.state.current.pressure
-        } < /p> <
-        p > Temperature: {
+        } < /p>
+        <p> Temperature: {
           this.state.current.temperature
-        } < /p> <
-        button id = "close-details"
+        } < /p>
+        <button id = "close-details"
         onClick = {
           this.props.clearStation
-        } > Close < /button> <
-        /div>
+        } > Close
+        < /button>
+        </div>
       )
     }
   }

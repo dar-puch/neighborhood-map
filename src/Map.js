@@ -139,11 +139,10 @@ class Map extends Component {
       <
       div id = "map"
       role = "application"
-      aria - hidden = "true" >
-      <
-      /div> <
-      /section> <
-      /div>
+      aria-hidden = "true" >
+      </div>
+      </section>
+      </div>
     )
   }
 } //end class
