@@ -87,7 +87,7 @@ handleErrors(response) {
         <header className="header">
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
-        <main>// don't render map before fetch is completed
+        <main>
         {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors map-container">Map cannot be loaded</p>
      }
       <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation} getStationData = {this.getStationData} error = {this.state.error}/>

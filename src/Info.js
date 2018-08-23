@@ -7,7 +7,7 @@ class Info extends Component {
   renderStations() {
      if (this.props.stationsFound.length > 0) {
     return (this.props.stationsFound.map((station) => (
-       <li key = {station.id} > <button className="show-details" id={station.id} onClick = {() => this.props.setStation(station)}>{station.name}, {station.address.route} {station.address.streetNumber} </button>
+       <li key = {station.id} > <button className="show-details" id={station.id} aria-label="show details" onClick = {() => this.props.setStation(station)}>{station.name}, {station.address.route} {station.address.streetNumber} </button>
  </li>
      )))
      }
@@ -15,7 +15,7 @@ class Info extends Component {
    else if ((this.props.allStations.length > 0) && (this.props.query === '')){
      return(
      this.props.allStations.map((station) => (
-       <li key = {station.id} ><button className="show-details" id={station.id} onClick = {() => this.props.setStation(station)}> {station.name}, {station.address.route} {station.address.streetNumber} </button> </li>
+       <li key = {station.id} ><button className="show-details" id={station.id} aria-label="show details" onClick = {() => this.props.setStation(station)}> {station.name}, {station.address.route} {station.address.streetNumber} </button> </li>
      )))
    }
    else {
@@ -46,15 +46,16 @@ render() {
         <h2>Filter Results</h2>
         <p className="instructions">Search stations by name or street address</p>
 
-        <input type = "text" placeholder = "Search" className="input-search"
+        <input type = "text" placeholder = "Search" aria-label="search" className="input-search"
                value = {this.props.query}
                onChange = {(event) => this.props.updateQuery(event.target.value)}/>
         </div>
-
+      <div className="stations-header">
+      <h2> Stations </h2>
+        <p className="instructions">Click on station to see measurements</p>
+        </div>
       <ul className="stations-list">
       {this.renderDescription()}
-      <h2> Stations </h2>
-      <p className="instructions">Click on station to see measurements</p>
       {this.renderStations()}
       </ul>
 
