@@ -1,9 +1,9 @@
-
 body, td, th, p {
   font-family: Arial, Helvetica, sans-serif;
   color: #252831;
   line-height: 1.5;
 }
+
 p {
   margin: 0;
 }
@@ -44,10 +44,10 @@ h1, h2, h3, h4, h5, h6 {
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
 button {
   cursor: pointer;
 }
-
 
 .App {
   text-align: center;
@@ -83,6 +83,7 @@ main {
   flex-wrap: wrap;
   align-items: stretch;
 }
+
 .col {
   width: 100%;
 }
@@ -90,10 +91,12 @@ main {
 .map {
   height: 100%;
 }
+
 .errors {
   text-align: center;
   font-size: 1.2rem;
 }
+
 .info {
   margin-bottom: 50px;
 }
@@ -112,20 +115,25 @@ main {
   width: 95%;
   margin: 0 auto;
 }
+
 .info-container {
-text-align: left;
+  text-align: left;
 }
+
 #filter {
   padding: 15px;
   background-color: #97A4C9;
 }
+
 #filter h2 {
   margin: 0;
 }
+
 .instructions {
   font-size: 0.8rem;
   margin-bottom: 5px;
 }
+
 .input-search {
   border: 1px solid #252831;
   margin: 6px 0;
@@ -136,33 +144,41 @@ text-align: left;
   padding: 0 15px;
   margin: 10px 0;
 }
+
 .stations-list {
-    padding: 0 15px;
-    margin: 0 0 20px 0;
+  padding: 0 15px;
+  margin: 0 0 20px 0;
 }
+
 .one-station-box {
-  background-color: #f3f3f3 ;
+  background-color: #f3f3f3;
   padding: 15px;
   margin-left: -15px;
   margin-right: -15px;
 }
+
 .index-description {
   padding: 15px;
   margin-left: -15px;
   margin-right: -15px;
 }
+
 .good {
   background-color: #00E400;
 }
+
 .moderate {
   background-color: #FFFF00;
 }
+
 .unhealthy1 {
   background-color: #FF7E00;
 }
+
 .unhealthy {
   background-color: #FF0000;
 }
+
 .unhealthy3 {
   background-color: #8F3F97;
 }
@@ -183,9 +199,11 @@ text-align: left;
   text-decoration: underline;
   font-size: 0.9rem;
 }
+
 .show-details:hover {
   color: #5E667D;
 }
+
 button#close-details {
   background-color: #252831;
   border: none;
@@ -194,6 +212,7 @@ button#close-details {
   text-transform: uppercase;
   margin: 15px 0;
 }
+
 button#close-details:hover {
   background-color: #5E667D;
 }
@@ -215,25 +234,26 @@ footer {
   box-sizing: border-box;
   padding: 0.5rem;
   height: 50px;
-
 }
+
 .attribution {
   font-size: 0.9rem;
   text-align: center;
   padding: 15px;
-
 }
+
 .logo-wrapper {
   width: 100%;
   margin-top: 15px;
 }
+
 .logo-airly {
   margin: 0 auto;
 }
+
 footer p {
   color: white;
 }
-
 
 @media screen and (min-width: 980px) {
   .col {
@@ -245,7 +265,7 @@ footer p {
   .info {
     order: 1;
   }
-.map-container {
+  .map-container {
     width: 50%;
     height: calc(100% - 60px);
     position: fixed;
