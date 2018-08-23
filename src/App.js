@@ -11,13 +11,13 @@ dataLoaded: false,
 stationsFound: [],
 query: '',
 oneStation: {},
-error: null
+error: ''
   }
 
   componentDidMount() {
   this.getAllStations() //get array of all stations in Warsaw
     .then(allStations => this.setState({allStations: allStations}, () => {
-       this.setState({dataLoaded: true}) })) // prevent passing empty array to map component
+       this.setState({dataLoaded: true}) })) // prevent passing empty array of stations to map component
     .catch(() => console.log('getAllStations failed'));
   }
 
@@ -43,6 +43,7 @@ this.setState({oneStation: {}})
 setStation = this.setStation.bind(this);
 clearStation = this.clearStation.bind(this);
 
+//service providing air quality info
 api = "https://airapi.airly.eu/v1";
 
 getAllStations = () =>
@@ -54,7 +55,7 @@ fetch(`${this.api}/sensors/current?southwestLat=52.311&southwestLong=20.87&north
 }
         })
         .then(this.handleErrors)
-    .catch(error => error)
+    .catch(error => this.setState({error: 'unable to get stations list (' + error.message + ')'}))
 .then(response => response.json())
   .then(allstations => allstations);
 
@@ -86,10 +87,10 @@ handleErrors(response) {
         <header className="header">
           <h1 className="title">Air quality in Warsaw</h1>
         </header>
-        <main>
-        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors map-container">Map will render soon</p>
+        <main>// don't render map before fetch is completed
+        {this.state.dataLoaded ? <Map allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} oneStation = {this.state.oneStation} query = {this.state.query}/> : <p className="errors map-container">Map cannot be loaded</p>
      }
-      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation} getStationData = {this.getStationData}/>
+      <Info allStations = {this.state.allStations} setStation = {this.setStation} stationsFound = {this.state.stationsFound} query = {this.state.query} updateQuery = {this.updateQuery} clearStation = {this.clearStation} oneStation = {this.state.oneStation} getStationData = {this.getStationData} error = {this.state.error}/>
 
     </main>
 

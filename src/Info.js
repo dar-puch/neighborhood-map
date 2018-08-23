@@ -39,8 +39,9 @@ renderDescription() {
 render() {
   return (
    <div className="col info">
+    <div className="errors">{this.props.error}</div>
   <section className="info-container">
-
+<div className="errors"></div>
       <div className="filter-options" id="filter">
         <h2>Filter Results</h2>
         <p className="instructions">Search stations by name or street address</p>
