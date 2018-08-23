@@ -1,6 +1,6 @@
-#Neighborhood Map: Air Quality in Warsaw
+# Neighborhood Map: Air Quality in Warsaw
 
-##About the application
+## About the application
 
 React app for Udacity's Front-End Web Developer Nanodegree course.
 Displays air quality sensors in Warsaw. Clicking on station on the list or on the map displays information about latest air quality's measurements. List can be filtered by station's name or address.
@@ -12,23 +12,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## What to do with it
 
-In the project directory, you can run:
+### Run the app in the development mode
 
-### `npm start`
+Cd to the project directory and run the app in the development mode typing `npm start`
 
-Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
+### Launch the test runner
+Type: `npm test`
 Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
 
-### `npm run build`
 
+### Build the app for production 
+Type: `npm run build`
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
