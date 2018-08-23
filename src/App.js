@@ -7,6 +7,12 @@ import Info from './Info';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.setStation = this.setStation.bind(this);
+    this.clearStation = this.clearStation.bind(this);
+    }
+
   state = {
     allStations: [],
     dataLoaded: false,
@@ -18,13 +24,9 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllStations() //get array of all stations in Warsaw
-      .then(allStations => this.setState({
-        allStations: allStations
-      }, () => {
-        this.setState({
-          dataLoaded: true
-        })
-      })) // prevent passing empty array of stations to map component
+      .then(allStations => this.setState({allStations},
+        () => this.setState({dataLoaded: true})
+      )) // prevent passing empty array of stations to map component
       .catch(() => console.log('getAllStations failed'));
   }
 
@@ -39,20 +41,17 @@ class App extends Component {
     }
   }
 
-  setStation(station) { //this function is called when user clicks particular station on the map
+  setStation = (station) => { //this function is called when user clicks particular station on the map
     this.setState({
       oneStation: station
     })
   }
 
-  clearStation() {
+  clearStation = () => {
     this.setState({
       oneStation: {}
     })
   }
-
-  setStation = this.setStation.bind(this);
-  clearStation = this.clearStation.bind(this);
 
   //service providing air quality info
   api = "https://airapi.airly.eu/v1";
@@ -156,7 +155,7 @@ class App extends Component {
       <
       p > Copyright(c) 2018 < strong > Puchweb Air < /strong> All Rights Reserved.</p >
       </footer> </div>
-       
+
     );
   }
 }
