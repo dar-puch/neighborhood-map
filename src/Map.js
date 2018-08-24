@@ -139,17 +139,19 @@ class Map extends Component {
 
   render() {
     if (this.state.mapLoad === true) {
-    return ( <
-      div className = "col map" >
-      <
-      section className = "map-container" >
-
-      <
-      div id = "map"
-      role = "application"
-      aria-hidden = "true" >
-      </div>
-      </section>
+    return (
+      <div
+      className = "col map" >
+        <section
+          className = "map-container"
+        >
+          <div
+            id = "map"
+            role = "application"
+            aria-hidden = "true"
+          >
+          </div>
+        </section>
       </div>
     )
   }
@@ -157,8 +159,8 @@ class Map extends Component {
   return (
     <div className = "col map" >
       <section className = "map-container" >
-    <div className = "error">  {this.message} </div>
-    </section>
+        <div className = "error">  {this.message} </div>
+        </section>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import React, {
 import './App.css';
 import Map from './Map';
 import Info from './Info';
-import {fetchAPI } from './constants';
+import {api, fetchAPI } from './constants';
 
 class App extends Component {
 
@@ -30,11 +30,6 @@ class App extends Component {
         () => this.setState({dataLoaded: true})
       )) // prevent passing empty array of stations to map component
       .catch(() => console.log('getAllStations failed'));
-  }
-
-  componentDidUpdate() {
-
-
   }
 
   updateQuery = (query) => {
@@ -66,55 +61,36 @@ class App extends Component {
         if (this.state.dataLoaded) { //prevent passing empty props
         return (
 
-      < Map allStations = {
-          this.state.allStations
-        }
-        setStation = {
-          this.setStation
-        }
-        stationsFound = {
-          this.state.stationsFound
-        }
-        oneStation = {
-          this.state.oneStation
-        }
-        query = {
-          this.state.query
-        }
-        fetchStations = {
-          this.state.fetchStations
-        }
+      < Map
+        allStations = {this.state.allStations}
+        setStation = {this.setStation}
+        stationsFound = {this.state.stationsFound}
+        oneStation = {this.state.oneStation}
+        query = {this.state.query}
+        fetchStations = {this.state.fetchStations}
+        dataLoaded = {this.state.dataLoaded}
+      />
+    )
+  }
 
-        dataLoaded = {this.state.dataLoaded}/> ) }
-
-        else {return (<p className="errors map-container">Rendering map...</p >
+        else {return (<p className="errors map-container">Rendering map...</p>
       )}
     }
 
-    else{ //render map also where there are no station list
+  else{ //render map also where there are no station list
       return (
 
-    < Map allStations = {
-        this.state.allStations
-      }
-      setStation = {
-        this.setStation
-      }
-      stationsFound = {
-        this.state.stationsFound
-      }
-      oneStation = {
-        this.state.oneStation
-      }
-      query = {
-        this.state.query
-      }
-      fetchStations = {
-        this.state.fetchStations
-      }
-
-      dataLoaded = {this.state.dataLoaded}/> )
-    }
+      < Map
+        allStations = {this.state.allStations}
+        setStation = {this.setStation}
+        stationsFound = {this.state.stationsFound}
+        oneStation = {this.state.oneStation}
+        query = {this.state.query}
+        fetchStations = {this.state.fetchStations}
+        dataLoaded = {this.state.dataLoaded}
+      />
+    )
+  }
 
 }
 
@@ -136,7 +112,7 @@ class App extends Component {
     .then(allstations => allstations)
 
   getStationData = (station) =>
-    fetch(`${this.api}sensor/measurements?sensorId=${station}`, {
+    fetch(`${api}sensor/measurements?sensorId=${station}`, {
       method: "GET",
       headers: {
         "apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
@@ -157,52 +133,31 @@ class App extends Component {
 
   render() {
 
-    return ( <
-      div className = "App" >
-      <
-      header className = "header" >
-      <
-      h1 className = "title" > Air quality in Warsaw < /h1> <
-      /header>
+    return (
+      <div className = "App" >
+        <header className = "header" >
+          <h1 className = "title" > Air quality in Warsaw < /h1>
+        </header>
       <main >
-      {this.renderMap()}
-      <Info allStations = {
-        this.state.allStations
-      }
-      setStation = {
-        this.setStation
-      }
-      stationsFound = {
-        this.state.stationsFound
-      }
-      query = {
-        this.state.query
-      }
-      updateQuery = {
-        this.updateQuery
-      }
-      clearStation = {
-        this.clearStation
-      }
-      oneStation = {
-        this.state.oneStation
-      }
-      getStationData = {
-        this.getStationData
-      }
-      error = {
-        this.state.error
-      }
-      />
+        {this.renderMap()}
+        <Info
+          allStations = {this.state.allStations}
+          setStation = {this.setStation}
+          stationsFound = {this.state.stationsFound}
+          query = {this.state.query}
+          updateQuery = {this.updateQuery}
+          clearStation = {this.clearStation}
+          oneStation = {this.state.oneStation}
+          getStationData = {this.getStationData}
+          error = {this.state.error}
+        />
 
-      <
-      /main>
+      </main>
 
-      <
-      footer >
-      <
-      p > Copyright(c) 2018 < strong > Puchweb Air < /strong> All Rights Reserved.</p >
-      </footer> </div>
+      <footer>
+        <p> Copyright(c) 2018 < strong > Puchweb Air </strong> All Rights Reserved.</p>
+      </footer>
+  </div>
 
     );
 

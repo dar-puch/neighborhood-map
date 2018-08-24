@@ -7,5 +7,6 @@ const neLong = "northeastLong=21.14";
 const fetchAPI = `${api}/sensors/current?${swLat}&${swLong}&${neLat}&${neLong}`
 
 export {
+  api,
   fetchAPI
 }

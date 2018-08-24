@@ -5,7 +5,7 @@ const NoData = ({clearStation}) => (
     <h3>Unable to get data from this station </h3>
     <button
       id = "close-details"
-      onclick = {clearStation}
+      onClick = {clearStation}
     >
       Close
     </button>

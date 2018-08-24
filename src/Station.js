@@ -36,7 +36,7 @@ class Station extends Component {
   }
 
   indexDescription() {
-    let index = Math.floor(this.state.current.airQualityIndex);
+    const index = Math.floor(this.state.current.airQualityIndex);
     if (index <= 50) return 'good';
     else if (index > 50 && index <= 100) return 'moderate';
     else if (index > 100 && index <= 150) return 'unhealthy1';
@@ -46,7 +46,7 @@ class Station extends Component {
   }
 
   formatDescription() {
-    let description = this.indexDescription();
+    const description = this.indexDescription();
     if (description === 'unhealthy1') return 'Unhealthy for Sensitive Groups';
     else if (description === 'unhealthy3') return 'Very Unhealthy';
     else return description
