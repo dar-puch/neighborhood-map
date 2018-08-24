@@ -87,6 +87,7 @@ class Station extends Component {
       <p> Temperature: {this.state.current.temperature} </p>
       <button
         id = "close-details"
+        className = "button"
         onClick = {clearStation}
         >
         Close

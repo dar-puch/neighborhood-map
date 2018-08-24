@@ -4,7 +4,14 @@ import React, {
 import Station from './Station';
 
 class Info extends Component {
+  constructor(props) {
+    super(props);
+    this.toggleStations = this.toggleStations.bind(this);
+    }
 
+state = {
+  stationsVisible: true
+}
 
   renderStations() {
     if (this.props.stationsFound.length > 0) {
@@ -64,7 +71,9 @@ class Info extends Component {
 
   };
 
-
+toggleStations() {
+  this.state.stationsVisible === false ? this.setState({stationsVisible: true}) : this.setState({stationsVisible: false})
+}
 
   render() {
     return (
@@ -97,13 +106,22 @@ class Info extends Component {
         <p className = "instructions" >
           Click on station to see measurements
         </p>
+        <button
+          id="toggleStations"
+          className="button"
+          onClick={this.toggleStations}
+        >
+        Toggle list
+        </button>
+
       </div>
-      <ul
-        className = "stations-list"
-      >
+      <ul>
       {this.renderDescription()}
-      {this.renderStations()
-      }
+        <div
+          className = {"stations-list " + (this.state.stationsVisible ? 'show' : 'hidden')}
+        >
+        {this.renderStations()}
+        </div>
       </ul>
 
         <div className = "attribution" >

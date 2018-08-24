@@ -204,7 +204,7 @@ main {
   color: #5E667D;
 }
 
-button#close-details {
+button.button {
   background-color: #252831;
   border: none;
   color: white;
@@ -213,8 +213,16 @@ button#close-details {
   margin: 15px 0;
 }
 
-button#close-details:hover {
+button.button:hover {
   background-color: #5E667D;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }
 
 footer {
@@ -271,6 +279,9 @@ footer p {
     position: fixed;
     top: 60px;
     right: 0;
+  }
+  button#toggleStations {
+    display: none;
   }
   footer {
     width: 50%;
