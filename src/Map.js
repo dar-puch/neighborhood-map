@@ -4,6 +4,9 @@ import React, {
 import MapStyles from './MapStyles.json';
 
 class Map extends Component {
+  state = {
+    mapLoad: false
+  }
   initialPos = {
     lat: 52.237049,
     lng: 21.017532
@@ -11,6 +14,8 @@ class Map extends Component {
   markers = [];
   foundMarkers = [];
   map;
+  message = 'Map not available'
+
   mapInit() {
     this.map = new window.google.maps.Map(
       document.getElementById('map'), {
@@ -94,16 +99,17 @@ class Map extends Component {
 
   componentDidMount() {
     let script = document.createElement('script');
-    script.src = `https://maps.google.com/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
+    script.src = `https://maps.google.co/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
     document.body.appendChild(script);
+
     script.addEventListener('load', e => {
-      this.mapInit();
-      if (this.props.allStations.length > 0) {
+      this.setState({mapLoad: true}, () => {this.mapInit(); this.message = ''});
+      if (this.props.dataLoaded === true) {
         this.showMarkers(this.props.allStations);
         this.setMapOnAll(this.map, this.markers)
       }
+})
 
-    })
   }
 
   componentDidUpdate() {
@@ -132,10 +138,12 @@ class Map extends Component {
 
 
   render() {
+    if (this.state.mapLoad === true) {
     return ( <
       div className = "col map" >
       <
       section className = "map-container" >
+
       <
       div id = "map"
       role = "application"
@@ -145,6 +153,17 @@ class Map extends Component {
       </div>
     )
   }
+  else {
+  return (
+    <div className = "col map" >
+      <section className = "map-container" >
+    <div className = "error">  {this.message} </div>
+    </section>
+    </div>
+  );
+}
+
+}
 } //end class
 
 export default Map

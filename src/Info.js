@@ -75,7 +75,8 @@ class Info extends Component {
 
 
   render() {
-    return ( <div className = "col info" >
+    return (
+      <div className = "col info" >
       <div className = "errors" > {
         this.props.error
       } </div>

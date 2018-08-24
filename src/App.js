@@ -16,6 +16,7 @@ class App extends Component {
   state = {
     allStations: [],
     dataLoaded: false,
+    fetchStations: true,
     stationsFound: [],
     query: '',
     oneStation: {},
@@ -28,6 +29,11 @@ class App extends Component {
         () => this.setState({dataLoaded: true})
       )) // prevent passing empty array of stations to map component
       .catch(() => console.log('getAllStations failed'));
+  }
+
+  componentDidUpdate() {
+
+
   }
 
   updateQuery = (query) => {
@@ -51,7 +57,66 @@ class App extends Component {
     this.setState({
       oneStation: {}
     })
-  }
+  };
+
+    renderMap() {
+      if(this.state.fetchStations) { //if there is stations list
+
+        if (this.state.dataLoaded) { //prevent passing empty props
+        return (
+
+      < Map allStations = {
+          this.state.allStations
+        }
+        setStation = {
+          this.setStation
+        }
+        stationsFound = {
+          this.state.stationsFound
+        }
+        oneStation = {
+          this.state.oneStation
+        }
+        query = {
+          this.state.query
+        }
+        fetchStations = {
+          this.state.fetchStations
+        }
+
+        dataLoaded = {this.state.dataLoaded}/> ) }
+
+        else {return (<p className="errors map-container">Rendering map...</p >
+      )}
+    }
+
+    else{ //render map also where there are no station list
+      return (
+
+    < Map allStations = {
+        this.state.allStations
+      }
+      setStation = {
+        this.setStation
+      }
+      stationsFound = {
+        this.state.stationsFound
+      }
+      oneStation = {
+        this.state.oneStation
+      }
+      query = {
+        this.state.query
+      }
+      fetchStations = {
+        this.state.fetchStations
+      }
+
+      dataLoaded = {this.state.dataLoaded}/> )
+    }
+
+}
+
 
   //service providing air quality info
   api = "https://airapi.airly.eu/v1";
@@ -66,10 +131,12 @@ class App extends Component {
     })
     .then(this.handleErrors)
     .catch(error => this.setState({
-      error: 'unable to get stations list (' + error.message + ')'
-    }))
+      error: 'unable to get stations list (' + error.message + ')',
+      fetchStations: false
+    },
+  ))
     .then(response => response.json())
-    .then(allstations => allstations);
+    .then(allstations => allstations)
 
   getStationData = (station) =>
     fetch(`${this.api}sensor/measurements?sensorId=${station}`, {
@@ -99,26 +166,10 @@ class App extends Component {
       header className = "header" >
       <
       h1 className = "title" > Air quality in Warsaw < /h1> <
-      /header> <
-      main > {
-        this.state.dataLoaded ? < Map allStations = {
-          this.state.allStations
-        }
-        setStation = {
-          this.setStation
-        }
-        stationsFound = {
-          this.state.stationsFound
-        }
-        oneStation = {
-          this.state.oneStation
-        }
-        query = {
-          this.state.query
-        }
-        /> : <p className="errors map-container">Map cannot be loaded</p >
-      } <
-      Info allStations = {
+      /header>
+      <main >
+      {this.renderMap()}
+      <Info allStations = {
         this.state.allStations
       }
       setStation = {
@@ -157,6 +208,7 @@ class App extends Component {
       </footer> </div>
 
     );
+
   }
 }
 
