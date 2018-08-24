@@ -99,7 +99,7 @@ class Map extends Component {
 
   componentDidMount() {
     let script = document.createElement('script');
-    script.src = `https://maps.google.co/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
+    script.src = `https://maps.google.com/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
     document.body.appendChild(script);
 
     script.addEventListener('load', e => {

@@ -4,6 +4,7 @@ import React, {
 import './App.css';
 import Map from './Map';
 import Info from './Info';
+import {fetchAPI } from './constants';
 
 class App extends Component {
 
@@ -117,12 +118,8 @@ class App extends Component {
 
 }
 
-
-  //service providing air quality info
-  api = "https://airapi.airly.eu/v1";
-
   getAllStations = () =>
-    fetch(`${this.api}/sensors/current?southwestLat=52.311&southwestLong=20.87&northeastLat=52.12&northeastLong=21.14`, {
+    fetch(fetchAPI, {
       method: "GET",
       headers: {
         "apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
