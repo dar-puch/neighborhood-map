@@ -14,15 +14,15 @@ class Station extends Component {
 
   componentDidMount() {
     this.props.getStationData(this.props.oneStation.id)
-      .then(details => this.setState({
-        current: details.currentMeasurements
+      .then(data => this.setState({
+        current: data.current
       }));
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.oneStation && prevProps.oneStation !== this.props.oneStation) {
       this.props.getStationData(this.props.oneStation.id)
-        .then(details => this.setState({
-          current: details.currentMeasurements
+        .then(data => this.setState({
+          current: data.current
         }));
     }
   }
@@ -35,23 +35,6 @@ class Station extends Component {
     window.scrollTo(0, this.container);
   }
 
-  indexDescription() {
-    const index = Math.floor(this.state.current.airQualityIndex);
-    if (index <= 50) return 'good';
-    else if (index > 50 && index <= 100) return 'moderate';
-    else if (index > 100 && index <= 150) return 'unhealthy1';
-    else if (index > 150 && index <= 200) return 'unhealthy';
-    else if (index > 200 && index <= 300) return 'unhealthy3';
-    else if (index > 300) return 'hazardous';
-  }
-
-  formatDescription() {
-    const description = this.indexDescription();
-    if (description === 'unhealthy1') return 'Unhealthy for Sensitive Groups';
-    else if (description === 'unhealthy3') return 'Very Unhealthy';
-    else return description
-  }
-
 
   render() {
     this.scrollToContainer();
@@ -61,30 +44,23 @@ class Station extends Component {
       return <NoData clearStation={clearStation}/>
     }
       return (
-      <div
-        ref = {this.container}
-        className = "one-station-box"
-        >
+      <div ref = {this.container} className = "one-station-box">
         <h3> Station no: {oneStation.id} </h3>
-        <p> {oneStation.name} </p>
-        <p> {oneStation.address.route}
-        {this.props.oneStation.address.streetNumber}
+        <p> {oneStation.sponsor.name}</p>
+        <p> {oneStation.address.street} {' '}
+        {this.props.oneStation.address.number}
         </p>
         <h3>
         Latest measurements:
         </h3>
-        <p className = {`${this.indexDescription()} index-description`} >
-        Air Quality Index:
-        < span className = "index" >
-        {Math.floor(this.state.current.airQualityIndex)}
-        ({this.formatDescription()})
-        < /span>
-      </p >
-      <p> Pollution level: {this.state.current.pollutionLevel}</p>
-      <p> PM 2.5: {Math.floor(this.state.current.pm25)} </p>
-      <p> PM 10: {Math.floor(this.state.current.pm10)} </p>
-      <p> Pressure: {this.state.current.pressure} </p>
-      <p> Temperature: {this.state.current.temperature} </p>
+        <p className ="index-description">
+        AIR POLLUTION LEVEL:
+        <span className="index" style={{color: `${this.state.current.indexes[0].color}`}}> {Math.floor(this.state.current.indexes[0].value)} ({this.state.current.indexes[0].level}) </span>
+      </p>
+      <p> PM 2.5: {this.state.current.values[1] ? this.state.current.values[1].value : 'not available'} </p>
+      <p> PM 10: {this.state.current.values[2] ? this.state.current.values[2].value : 'not available'} </p>
+      <p> Pressure: {this.state.current.values[3] ? this.state.current.values[3].value : 'not available'} </p>
+      <p> Temperature: {this.state.current.values[5] ? this.state.current.values[5].value : 'not available'} {'\u2103'}</p>
       <button
         id = "close-details"
         className = "button"

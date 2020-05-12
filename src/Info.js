@@ -26,9 +26,9 @@ state = {
               onClick = {
                 () => this.props.setStation(station)}
             >
-            {station.name},
-            {station.address.route}
-            {station.address.streetNumber}
+            {station.sponsor.name},
+            {station.address.street}
+            {station.address.number}
             </button>
         </li>
       )))
@@ -46,9 +46,9 @@ state = {
               () => this.props.setStation(station)
             }
           >
-            {station.name},
-            {station.address.route}
-            {station.address.streetNumber}
+            {station.sponsor.name},{' '}
+            {station.address.street}{' '}
+            {station.address.number}
           </button>
         </li>
         )))

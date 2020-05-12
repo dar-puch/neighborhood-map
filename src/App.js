@@ -35,7 +35,7 @@ class App extends Component {
   updateQuery = (query) => {
     if (this.state.allStations.length > 0) {
       query = query.toLowerCase(); //our search is not case sensitive
-      let stationsFound = this.state.allStations.filter(station => station.name.toLowerCase().search(query) > -1 || station.address.route.toLowerCase().search(query) > -1); //filter array of all stations to match query
+      let stationsFound = this.state.allStations.filter(station => station.sponsor.name && station.sponsor.name.toLowerCase().search(query) > -1 || station.address.street && station.address.street.toLowerCase().search(query) > -1); //filter array of all stations to match query
       this.setState({
         stationsFound: stationsFound, //save results as state
         query: query
@@ -112,7 +112,7 @@ class App extends Component {
     .then(allstations => allstations)
 
   getStationData = (station) =>
-    fetch(`${api}sensor/measurements?sensorId=${station}`, {
+    fetch(`${api}/measurements/installation?installationId=${station}`, {
       method: "GET",
       headers: {
         "apikey": "h0b3J4laim1FiCVlW7dtnje1srYEOPK9",
@@ -120,8 +120,8 @@ class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(details => details)
-    .catch(err => console.log('getting details failed'));
+    .then(data => data)
+    .catch(err => console.log('getting details failed: ' + err));
 
   handleErrors(response) {
     if (!response.ok) {
@@ -136,7 +136,7 @@ class App extends Component {
     return (
       <div className = "App" >
         <header className = "header" >
-          <h1 className = "title" > Air quality in Warsaw < /h1>
+          <h1 className = "title" > Air quality sensors in Warsaw < /h1>
         </header>
       <main >
         {this.renderMap()}

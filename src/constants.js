@@ -1,12 +1,13 @@
 
-const api = "https://airapi.airly.eu/v1"; //service providing air quality info
-const swLat = "southwestLat=52.311";
-const swLong = "southwestLong=20.87";
-const neLat = "northeastLat=52.12";
-const neLong = "northeastLong=21.14";
-const fetchAPI = `${api}/sensors/current?${swLat}&${swLong}&${neLat}&${neLong}`
+const api = "https://airapi.airly.eu/v2"; //service providing air quality info
+const initialPos = {
+  lat: 52.237049,
+  lng: 21.017532
+};
+const fetchAPI = `${api}/installations/nearest?lat=${initialPos.lat}&lng=${initialPos.lng}&maxDistanceKM=15&maxResults=-1`
 
 export {
   api,
-  fetchAPI
+  fetchAPI,
+  initialPos
 }

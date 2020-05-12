@@ -2,15 +2,13 @@ import React, {
   Component
 } from 'react';
 import MapStyles from './MapStyles.json';
+import {initialPos } from './constants';
 
 class Map extends Component {
   state = {
     mapLoad: false
   }
-  initialPos = {
-    lat: 52.237049,
-    lng: 21.017532
-  };
+
   markers = [];
   foundMarkers = [];
   map;
@@ -19,7 +17,7 @@ class Map extends Component {
   mapInit() {
     this.map = new window.google.maps.Map(
       document.getElementById('map'), {
-        center: this.initialPos,
+        center: initialPos,
         mapTypeControl: false,
         streetViewControl: false,
         rotateControl: false,
@@ -101,7 +99,6 @@ class Map extends Component {
     let script = document.createElement('script');
     script.src = `https://maps.google.com/maps/api/js?key=AIzaSyB0xEceRYGqGevmv0eg0RF6DfbAXXDFySs`;
     document.body.appendChild(script);
-
     script.addEventListener('load', e => {
       this.setState({mapLoad: true}, () => {this.mapInit(); this.message = ''});
       if (this.props.dataLoaded === true) {
