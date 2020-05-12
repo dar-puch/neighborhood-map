@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## What to do with it
 
-### See
+### See live
 http://puchweb.pl/air/
 
 ### Copy or clone git repository
