@@ -2,8 +2,7 @@
 
 ## About the application
 
-React app for Udacity's Front-End Web Developer Nanodegree course.
-Displays air quality sensors in Warsaw. Clicking on station on the list or on the map displays information about latest air quality's measurements. List can be filtered by station's name or address.
+React app which displays air quality sensors in Warsaw. Clicking on station on the list or on the map displays information about latest air quality's measurements. List can be filtered by station's name or address.
 
 Uses [Google Maps API](https://cloud.google.com/maps-platform/) and [Airly API](http://www.map.airly.eu)
 
